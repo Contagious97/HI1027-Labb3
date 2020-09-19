@@ -27,12 +27,13 @@ public class World {
         this.height = height;
 
 
-        shapes = new Shape[2]; // an array of references (change to non-zero size)
+        shapes = new Shape[3]; // an array of references (change to non-zero size)
         // Create the actual Shape objects (sub types)
         // ....
 
         shapes[0] = new Line(50,100,50,50, Color.BLUE);
-        shapes[1] = new Line(100,150,200,200,Color.RED);
+        shapes[1] = new Circle(75,75,30,Color.BLACK);
+        shapes[2] = new Rectangle(40,50,40,40,Color.GREEN);
 
 
     }
@@ -57,10 +58,12 @@ public class World {
     public void move(long elapsedTimeNs) {
 
         for (Shape s: shapes){
+            if (s instanceof FillableShape && s.getColor() == Color.GREEN){
+                ((FillableShape) s).setFilled(true);
+            }
             s.move(elapsedTimeNs);
             s.constrain(0,0,width,height);
         }
-
     }
 
     /**

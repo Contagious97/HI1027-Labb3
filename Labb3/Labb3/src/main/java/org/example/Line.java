@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 
 public class Line extends Shape {
     double x1,x2,y1,y2;
-    Color color;
+
 
     public Line(double x1, double x2, double y1, double y2, Color color){
         this.x1 = x1;
@@ -14,7 +14,7 @@ public class Line extends Shape {
         this.setY(y1);
         this.x2 = x2;
         this.y2 = y2;
-        this.color = color;
+        this.setColor(color);
         this.setVelocity(30,30);
     }
 
@@ -52,7 +52,7 @@ public class Line extends Shape {
 
     @Override
     public void paint(GraphicsContext gc){
-        gc.setStroke(color);
+        gc.setStroke(getColor());
         gc.setLineWidth(5);
         gc.strokeLine(x1,y1,x2,y2);
     }
@@ -61,25 +61,25 @@ public class Line extends Shape {
             double boxX, double boxY,
             double boxWidth, double boxHeight) {
         // If outside the box - calculate new dx and dy
-        double dx = this.getDx(),dy = this.getDy();
+        double dx = getDx(),dy = getDy();
         if (x1 < boxX) {
-            dx = Math.abs(this.getDx());
+            dx = Math.abs(getDx());
         } else if (x2 > boxWidth) {
-            dx = -Math.abs(this.getDx());
+            dx = -Math.abs(getDx());
         }
         if (y1 < boxY) {
-            dy = Math.abs(this.getDy());
+            dy = Math.abs(getDy());
         } else if (y2 > boxHeight) {
-            dy = -Math.abs(this.getDy());
+            dy = -Math.abs(getDy());
         }
 
         this.setVelocity(dx,dy);
     }
     @Override
     public void move(long elapsedTimeNs) {
-        x1 += this.getDx() * elapsedTimeNs / BILLION;
-        y1 += this.getDy() * elapsedTimeNs / BILLION;
-        x2 += this.getDx() * elapsedTimeNs / BILLION;
-        y2 += this.getDy() * elapsedTimeNs / BILLION;
+        x1 += getDx() * elapsedTimeNs / BILLION;
+        y1 += getDy() * elapsedTimeNs / BILLION;
+        x2 += getDx() * elapsedTimeNs / BILLION;
+        y2 += getDy() * elapsedTimeNs / BILLION;
     }
 }
