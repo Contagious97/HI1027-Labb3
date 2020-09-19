@@ -1,5 +1,8 @@
 package org.example; // TODO: Change to your package name
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 /**
  * A representation of a world containing a set of moving shapes. NB! The worlds
  * y-axis points downward.
@@ -23,9 +26,15 @@ public class World {
         this.width = width;
         this.height = height;
 
-        shapes = new Shape[0]; // an array of references (change to non-zero size)
+
+        shapes = new Shape[2]; // an array of references (change to non-zero size)
         // Create the actual Shape objects (sub types)
         // ....
+
+        shapes[0] = new Line(50,100,50,50, Color.BLUE);
+        shapes[1] = new Line(100,150,200,200,Color.RED);
+
+
     }
 
     /**
@@ -46,11 +55,12 @@ public class World {
      * @param elapsedTimeNs the elapsed time in nanoseconds
      */
     public void move(long elapsedTimeNs) {
-        // alterantive loop: for(Shape s : shapes) { ...
-        for (int i = 0; i < shapes.length; i++) { 
-            shapes[i].move(elapsedTimeNs);
-            shapes[i].constrain(0, 0, width, height);
+
+        for (Shape s: shapes){
+            s.move(elapsedTimeNs);
+            s.constrain(0,0,width,height);
         }
+
     }
 
     /**
@@ -62,4 +72,5 @@ public class World {
     public Shape[] getShapes() {
         return (Shape[]) shapes.clone();
     }
+
 }
