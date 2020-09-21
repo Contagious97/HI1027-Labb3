@@ -62,5 +62,4 @@ public class Circle extends FillableShape {
         setY(getY() + getDy()*elapsedTimeNs/BILLION);
 
     }
-
 }

@@ -8,7 +8,7 @@ public class Rectangle extends FillableShape {
 
     private double height, width;
 
-    public Rectangle(double height, double width, double x, double y, Color color){
+    public Rectangle(double height, double width, double x, double y, Color color) {
         this.height = height;
         this.width = width;
         setX(x);
@@ -34,7 +34,6 @@ public class Rectangle extends FillableShape {
         return width;
     }
 
-
     @Override
     public void paint(GraphicsContext gc){
         gc.setLineWidth(2);
@@ -53,8 +52,8 @@ public class Rectangle extends FillableShape {
     public void move(long elapsedTimeNs) {
         setX(getX()+getDx()*elapsedTimeNs/BILLION);
         setY(getY()+getDy()*elapsedTimeNs/BILLION);
-
     }
+
     @Override
     public void constrain(
             double boxX, double boxY,
@@ -73,5 +72,4 @@ public class Rectangle extends FillableShape {
         }
         setVelocity(dx,dy);
     }
-
 }

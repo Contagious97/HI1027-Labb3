@@ -20,7 +20,7 @@ public class Isbn {
             throw new IllegalArgumentException("illegal pnr: " + isbn().isbnStr);
         }
         isbnPattern = isbn().isbnStr;
-        return isbnPattern;
+        return isbn();
     }
 
 

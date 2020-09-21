@@ -30,7 +30,7 @@ public class CollectionOfBooks {
         {
             if(theBooks.get(i).getTitle().compareTo(title) == 0)
             {
-                titleList.add(titleList.);
+//                titleList.add(titleList.);
             }
         }
         return titleList;

@@ -4,14 +4,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Line extends Shape {
-    double x1,x2,y1,y2;
+    double x2,y2;
 
 
-    public Line(double x1, double x2, double y1, double y2, Color color){
-        this.x1 = x1;
-        this.setX(x1);
-        this.y1 = y1;
-        this.setY(y1);
+    public Line(double x, double x2, double y, double y2, Color color){
+        this.setX(x);
+        this.setY(y);
         this.x2 = x2;
         this.y2 = y2;
         this.setColor(color);
@@ -34,19 +32,11 @@ public class Line extends Shape {
         y2 = newY2;
     }
 
-    public void setX1(double x1) {
-        this.x1 = x1;
-    }
-
-    public void setY1(double y1) {
-        this.y1 = y1;
-    }
-
     @Override
     public void paint(GraphicsContext gc){
         gc.setStroke(getColor());
         gc.setLineWidth(5);
-        gc.strokeLine(x1,y1,x2,y2);
+        gc.strokeLine(getX(),getY(),x2,y2);
     }
     @Override
     public void constrain(
@@ -54,12 +44,12 @@ public class Line extends Shape {
             double boxWidth, double boxHeight) {
         // If outside the box - calculate new dx and dy
         double dx = getDx(),dy = getDy();
-        if (x1 < boxX) {
+        if (getX() < boxX) {
             dx = Math.abs(getDx());
         } else if (x2 > boxWidth) {
             dx = -Math.abs(getDx());
         }
-        if (y1 < boxY) {
+        if (getY()< boxY) {
             dy = Math.abs(getDy());
         } else if (y2 > boxHeight) {
             dy = -Math.abs(getDy());
@@ -69,8 +59,8 @@ public class Line extends Shape {
     }
     @Override
     public void move(long elapsedTimeNs) {
-        x1 += getDx() * elapsedTimeNs / BILLION;
-        y1 += getDy() * elapsedTimeNs / BILLION;
+        setX(getX()+getDx() * elapsedTimeNs / BILLION);
+        setY(getY()+getDy() * elapsedTimeNs / BILLION);
         x2 += getDx() * elapsedTimeNs / BILLION;
         y2 += getDy() * elapsedTimeNs / BILLION;
     }
