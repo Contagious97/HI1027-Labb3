@@ -34,14 +34,6 @@ public class Line extends Shape {
         y2 = newY2;
     }
 
-    public double getX1() {
-        return x1;
-    }
-
-    public double getY1() {
-        return y1;
-    }
-
     public void setX1(double x1) {
         this.x1 = x1;
     }
