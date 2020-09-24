@@ -1,35 +1,26 @@
 package books;
 
 public class Isbn {
-    private static String isbnPattern;
+    private static String isbnPattern = "[0-9]{13}";
     private String isbnStr;
-    private Book isbn;
 
-    public Isbn(String isbnStr, Book isbn) {
-        this.isbnStr = isbnStr;
-        this.isbn = isbn;
+    private Isbn() {
+        isbnStr = new String();
     }
 
-    public static Isbn isbn()throws IllegalStateException{
-        String isbn = isbn().getIsbnStr();
+    public static Isbn createIsbn(String isbn)throws IllegalStateException{
+        Isbn theIsbn = new Isbn();
         isbn = isbn.replace("-","");
-        boolean match = isbn.matches("[0-9]{13}");
-
-        if (!isbn.matches(isbnPattern))
+        boolean match = isbn.matches(isbnPattern);
+        if (!match)
         {
-            throw new IllegalArgumentException("illegal pnr: " + isbn().isbnStr);
+            throw new IllegalArgumentException("illegal Isbn: " + isbn);
         }
-        isbnPattern = isbn().isbnStr;
-        return isbn();
+        theIsbn.isbnStr = isbn;
+        return theIsbn;
     }
 
 
-
-    public Isbn createIsbn(String isbnStr){
-        var str = getIsbnStr();
-        isbnStr = str;
-        return Isbn.this;
-    }
 
     public String getIsbnStr() {
         return isbnStr;
@@ -39,7 +30,7 @@ public class Isbn {
     public String toString() {
         return "Isbn{" +
                 "isbnStr='" + isbnStr + '\'' +
-                ", isbn=" + isbn +
+                ", isbn=" +  +
                 '}';
     }
 }
