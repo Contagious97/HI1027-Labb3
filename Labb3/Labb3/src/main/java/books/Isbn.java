@@ -1,45 +1,32 @@
 package books;
 
+import java.util.IllegalFormatException;
+
 public class Isbn {
-    private static String isbnPattern;
+    private static final String isbnPattern = "[0-9]{13}";
     private String isbnStr;
-    private Book isbn;
 
-    public Isbn(String isbnStr, Book isbn) {
-        this.isbnStr = isbnStr;
-        this.isbn = isbn;
+    private Isbn() {
+
     }
 
-    public static Isbn isbn()throws IllegalStateException{
-        String isbn = isbn().getIsbnStr();
+    public static Isbn createIsbn(String isbnStr) throws IllegalFormatException {
+
+        Isbn newIsbn = new Isbn();
+        String isbn = isbnPattern;
+
         isbn = isbn.replace("-","");
-        boolean match = isbn.matches("[0-9]{13}");
+        boolean match = isbnStr.matches(isbn);
 
-        if (!isbn.matches(isbnPattern))
+        if (!isbnStr.matches(isbn))
         {
-            throw new IllegalArgumentException("illegal pnr: " + isbn().isbnStr);
+            throw new IllegalArgumentException("illegal isbn: " + isbn);
         }
-        isbnPattern = isbn().isbnStr;
-        return isbn();
-    }
-
-
-
-    public Isbn createIsbn(String isbnStr){
-        var str = getIsbnStr();
-        isbnStr = str;
-        return Isbn.this;
+        newIsbn.isbnStr = isbn;
+        return newIsbn;
     }
 
     public String getIsbnStr() {
         return isbnStr;
-    }
-
-    @Override
-    public String toString() {
-        return "Isbn{" +
-                "isbnStr='" + isbnStr + '\'' +
-                ", isbn=" + isbn +
-                '}';
     }
 }

@@ -5,12 +5,18 @@ import java.time.LocalDate;
 public class Author {
     private String name;
     private LocalDate dateOfBirth;
-    Book book;
 
-    public Author(String name, LocalDate dateOfBirth, Book book) {
+    public Author(String name) {
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.book = book;
+        this.dateOfBirth = LocalDate.now();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
 }
