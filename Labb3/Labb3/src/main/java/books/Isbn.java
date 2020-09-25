@@ -1,6 +1,8 @@
 package books;
 
-public class Isbn {
+import java.io.Serializable;
+
+public class Isbn implements Serializable {
     private static String isbnPattern = "[0-9]{13}";
     private String isbnStr;
 

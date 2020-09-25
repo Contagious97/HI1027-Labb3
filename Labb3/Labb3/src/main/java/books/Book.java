@@ -5,19 +5,16 @@ import java.security.PrivateKey;
 import java.util.*;
 import java.util.Comparator;
 
-public class Book<T> implements Comparable<Book>, Serializable {
+public class Book implements Comparable<Book>, Serializable {
         private String title;
         private int rating;
         private ArrayList<Author> authors;
         private Isbn isbn;
-        public T type;
-        public Book(String title, int rating, List<Author> authors) {
+        public Book(String title, int rating, Isbn isbn) {
             this.title = title;
             this.rating = rating;
             this.authors = new ArrayList<>();
-            if (authors != null){
-                authors.addAll(authors);
-            }
+            this.isbn = isbn;
         }
 
         public void addAuthor(Author author){
@@ -33,6 +30,10 @@ public class Book<T> implements Comparable<Book>, Serializable {
 
         public int getRating(){
             return rating;
+        }
+
+        public Isbn getIsbn(){
+            return this.isbn;
         }
 
         @Override
@@ -59,14 +60,12 @@ public class Book<T> implements Comparable<Book>, Serializable {
         }
 
 
-
-//
-//        @Override
-//        public boolean equals(Object o) {
-//            if (this == o) return true;
-//            if (o == null || getClass() != o.getClass()) return false;
-//            Book book = (Book) o;
-//            return Objects.equals(title, book.title) &&
-//                    Arrays.equals(rating, book.rating);
-//        }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Book book = (Book) o;
+            return Objects.equals(title, book.title) &&
+                    (rating == book.rating);
+        }
     }
