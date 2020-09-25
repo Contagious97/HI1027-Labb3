@@ -16,6 +16,7 @@ public class testMain {
         book1.addAuthor(new Author("Mohamed Osman"));
         book2.addAuthor(new Author("Robin Jamsahar"));
         book3.addAuthor(new Author("Ahmed "));
+
         theBooks.addBook(book1);
         theBooks.addBook(book2);
         theBooks.addBook(book3);
@@ -23,7 +24,7 @@ public class testMain {
         List<Book> booksByAuthor;
         List<Book> booksByTitle;
         booksByTitle = theBooks.getBooksByTitle("in");
-        booksByAuthor = theBooks.getBooksByAuthor(" ");
+        booksByAuthor = theBooks.getBooksByAuthor("in");
         //Collections.sort(theBooks.getBooks(),Book::compareByRating);
         //System.out.println(theBooks.sortByRating().toString());
         printBooks(booksByAuthor);

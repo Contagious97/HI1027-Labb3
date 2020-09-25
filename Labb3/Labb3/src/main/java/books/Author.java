@@ -1,8 +1,9 @@
 package books;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Author {
+public class Author implements Serializable {
     private String name;
     private LocalDate dateOfBirth;
 
@@ -14,6 +15,7 @@ public class Author {
     public String getName(){
         return this.name;
     }
+
 
     @Override
     public String toString() {
