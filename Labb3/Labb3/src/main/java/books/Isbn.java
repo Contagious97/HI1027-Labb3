@@ -11,9 +11,9 @@ public class Isbn implements Serializable {
     }
 
     /**
-     * creates a valid isbn by replacing "-" and checks if the given isbn matches the isbnPattern
-     * @param isbn
-     * @return theIsbn which is now a valid pattern to return
+     * Constructs an Isbn by replacing "-" and checks if the given Isbn matches the isbnPattern
+     * @param isbn a string containing an Isbn number
+     * @return a new constructed Isbn
      * @throws IllegalStateException if the pattern do not match the given isbn
      */
     public static Isbn createIsbn(String isbn)throws IllegalStateException{
@@ -29,8 +29,8 @@ public class Isbn implements Serializable {
     }
 
     /**
-     *
-     * @return current isbn string (but in numbers)
+     * Returns a String containing the Isbn number
+     * @return current isbn string
      */
 
     public String getIsbnStr() {

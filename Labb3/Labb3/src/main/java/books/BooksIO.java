@@ -2,14 +2,19 @@ package books;
 
 import java.io.*;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
 
+
+/**
+ * This class is in charge of serializing and deserializing a List of Books
+ */
 public class BooksIO {
 
     /**
      * Call this method before the application exits, to store the books,
      * in serialized form, on file the specified file.
+     * @param filename  the name of the file to serialize from
+     * @param books  the List of books to read to the file
+     * @throws IOException
      */
     public void serializeToFile(String filename, List<Book> books) throws IOException {
 
@@ -35,6 +40,8 @@ public class BooksIO {
     /**
      * Call this method at startup of the application, to deserialize the books
      * from file the specified file.
+     * @param filename - the file name to deserialize from
+     * @throws IOException,NullPointerException
      */
     @SuppressWarnings("unchecked")
     public List<Book> deSerializeFromFile(String filename) throws IOException, ClassNotFoundException, NullPointerException {

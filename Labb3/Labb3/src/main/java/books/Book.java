@@ -6,8 +6,9 @@ import java.util.*;
 import java.util.Comparator;
 
 /**
- * Represents a book in a library
- * A book can vary alot depending on the author, title, ISBN and ratings
+ * This class represents a book
+ * A book can have an author, a title, an ISBN and a rating
+ * The class is Serializable and Comparable
  */
 public class Book implements Comparable<Book>, Serializable {
         private String title;
@@ -85,7 +86,7 @@ public class Book implements Comparable<Book>, Serializable {
 
     /**
      * getGenre returns a genre
-     * @return genre
+     * @return genre of the book
      */
     public Genre getGenre() {
         return genre;
@@ -93,7 +94,7 @@ public class Book implements Comparable<Book>, Serializable {
 
     /**
      * compares a title from a book to a title of a user given book
-     * @param book is a chosen book by the user
+     * @param book is another book to compare to
      * @return 0 if the title comparison is the same, else returns a positive or negative value
      */
     @Override
@@ -104,7 +105,7 @@ public class Book implements Comparable<Book>, Serializable {
     /**
      *
      * @param book is a chosen book containing ratings,isbn,title,genre and a list of authors
-     * @return
+     * @return 0 if the rating is the same, else returns the difference between the ratings
      */
         public int compareByRating(Book book){
             return book.rating - rating;
