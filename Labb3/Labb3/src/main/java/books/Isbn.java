@@ -30,9 +30,6 @@ public class Isbn implements Serializable {
 
     @Override
     public String toString() {
-        return "Isbn{" +
-                "isbnStr='" + isbnStr + '\'' +
-                ", isbn=" +  +
-                '}';
+        return getIsbnStr();
     }
 }

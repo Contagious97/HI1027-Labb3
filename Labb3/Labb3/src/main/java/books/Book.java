@@ -10,21 +10,27 @@ public class Book implements Comparable<Book>, Serializable {
         private int rating;
         private ArrayList<Author> authors;
         private Isbn isbn;
-        public Book(String title, int rating, Isbn isbn) {
+        private Genre genre;
+        public Book(String title, int rating, Isbn isbn, Genre genre) {
             this.title = title;
             this.rating = rating;
             this.authors = new ArrayList<>();
             this.isbn = isbn;
+            this.genre = genre;
         }
 
         public void addAuthor(Author author){
             authors.add(author);
         }
 
+        public void addAuthors(List<Author> authors){
+            this.authors.addAll(authors);
+        }
         public List<Author> getAuthors() {
             List<Author> copyAuthors = new ArrayList<>();
-
-            copyAuthors.addAll(authors);
+            for (Author author: authors){
+                copyAuthors.add(new Author(author.getName()));
+            }
             return copyAuthors;
         }
 
@@ -32,11 +38,23 @@ public class Book implements Comparable<Book>, Serializable {
             return rating;
         }
 
-        public Isbn getIsbn(){
-            return this.isbn;
+        public void setRating(int rating) throws IllegalArgumentException{
+            if (rating<0 || rating >5){
+                throw new IllegalArgumentException();
+            }
+            else this.rating = rating;
+
         }
 
-        @Override
+        public String getIsbn(){
+            return isbn.getIsbnStr();
+        }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    @Override
         public int compareTo(Book book){
             return title.compareTo(book.getTitle());
         }
@@ -47,12 +65,7 @@ public class Book implements Comparable<Book>, Serializable {
 
         @Override
         public String toString() {
-            return "Book{" +
-                    "title='" + title + '\'' +
-                    ", rating=" + rating +
-                    ", authors=" + authors.toString() +
-                    ", isbn=" + isbn +
-                    '}';
+            return "Title: " + title + " Authors:" + authors.toString() + " Rating:" + rating + " Isbn:" + isbn.toString() + " Genre: " + genre.toString();
         }
 
         public String getTitle() {

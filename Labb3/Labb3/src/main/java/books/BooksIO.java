@@ -27,7 +27,7 @@ public class BooksIO {
             try {
                 if(out != null)	out.close();
             } catch(Exception e) {
-                e.printStackTrace();
+                System.out.println("An error occured");;
             }
         }
     }
@@ -44,6 +44,7 @@ public class BooksIO {
         if (!file.createNewFile()){
             System.out.println("File already exists");
         }
+        else System.out.println("Creating new file...");
 
         try {
             in = new ObjectInputStream(

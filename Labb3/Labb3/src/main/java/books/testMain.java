@@ -10,9 +10,9 @@ import java.util.List;
 public class testMain {
     public static void main(String[] args) {
         CollectionOfBooks theBooks = new CollectionOfBooks();
-        Book book1 = new Book("Momo",5,null);
-        Book book2 = new Book("Robin",1,null);
-        Book book3 = new Book("Arvin",2,null);
+        Book book1 = new Book("Momo",5,null,Genre.COMEDY);
+        Book book2 = new Book("Robin",1,null,Genre.HORROR);
+        Book book3 = new Book("Arvin",2,null,Genre.DRAMA);
         book1.addAuthor(new Author("Mohamed Osman"));
         book2.addAuthor(new Author("Robin Jamsahar"));
         book3.addAuthor(new Author("Ahmed "));

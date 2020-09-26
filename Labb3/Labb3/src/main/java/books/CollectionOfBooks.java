@@ -20,19 +20,29 @@ public class CollectionOfBooks {
     }
 
     public Book getBook(int index){
-
         return theBooks.get(index);
-
     }
 
-    public Book remove(int position){
-        return theBooks.remove(position);
+    public void remove(int position) throws IndexOutOfBoundsException{
+        theBooks.remove(position);
     }
 
+    public void remove(Book book){
+        if (theBooks.contains(book)){
+            theBooks.remove(book);
+        }
+    }
 
     public List<Book> getBooks(){
         List<Book> copyOfBooks = new ArrayList<>();
-        copyOfBooks.addAll(theBooks);
+
+        for (Book book: theBooks){
+            copyOfBooks.add(new Book(book.getTitle(), book.getRating(),Isbn.createIsbn(book.getIsbn()),book.getGenre()));
+            for (int i = 0; i<copyOfBooks.size(); i++){
+                copyOfBooks.get(i).addAuthors(book.getAuthors());
+            }
+        }
+
         return copyOfBooks;
     }
 
@@ -54,13 +64,22 @@ public class CollectionOfBooks {
         List<Book> booksByIsbn = null;
         searchWord = searchWord.replace("-","");
         for (Book book: theBooks){
-            for (int i = 0; i<book.getIsbn().getIsbnStr().length(); i++){
-                if (searchWord.charAt(i) == book.getIsbn().getIsbnStr().charAt(i)){
+            for (int i = 0; i<book.getIsbn().length(); i++){
+                if (searchWord.charAt(i) == book.getIsbn().charAt(i)){
                     booksByIsbn.add(book);
                 }
             }
         }
         return booksByIsbn;
+    }
+    public List<Book> getBooksByGenre(Genre genre){
+        List<Book> booksByGenre = null;
+        for (Book book: theBooks){
+            if (book.getGenre().getValue() == genre.getValue()){
+                booksByGenre.add(book);
+            }
+        }
+        return booksByGenre;
     }
 
     @Override
@@ -68,7 +87,7 @@ public class CollectionOfBooks {
         String info = "";
         int i = 0;
         for (Book book: theBooks){
-            info += "Book " + (i+1) + ": " + book.getTitle() + " Authors: " + book.getAuthors().toString() + " Rating: " + book.getRating();
+            info += "Book " + (i+1) + ": "+ book.toString();
             info+= "\n";
             i++;
         }
@@ -81,6 +100,14 @@ public class CollectionOfBooks {
 
         Collections.sort(copyOfBooks,Book::compareByRating);
         return copyOfBooks;
+    }
+
+    public void addAuthorToBook(Book book, String author){
+        for (Book b: theBooks){
+            if (b.equals(book)){
+                b.addAuthor(new Author(author));
+            }
+        }
     }
 
 
