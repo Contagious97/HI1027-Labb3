@@ -79,7 +79,7 @@ public class CollectionOfBooks {
         List<Book> booksByTitle = new ArrayList<>();
         boolean contains = false;
         for (Book book: theBooks){
-            contains = book.getTitle().contains(searchWord);
+            contains = book.getTitle().toLowerCase().contains(searchWord.toLowerCase());
             if (contains){
                 booksByTitle.add(book);
                 continue;
@@ -180,7 +180,7 @@ public class CollectionOfBooks {
         for (Book book: theBooks){
             authors.addAll(book.getAuthors());
             for (var bookAuthors : authors){
-                contains = bookAuthors.getName().contains(search);
+                contains = bookAuthors.getName().toLowerCase().contains(search.toLowerCase());
                 if (contains){
                     booksByAuthor.add(book);
                     continue;
