@@ -59,12 +59,11 @@ public class CollectionOfBooks {
      */
     public List<Book> getBooks(){
         List<Book> copyOfBooks = new ArrayList<>();
-
+        int index = 0;
         for (Book book: theBooks){
             copyOfBooks.add(new Book(book.getTitle(), book.getRating(),Isbn.createIsbn(book.getIsbn()),book.getGenre()));
-            for (int i = 0; i<copyOfBooks.size(); i++){
-                copyOfBooks.get(i).addAuthors(book.getAuthors());
-            }
+            copyOfBooks.get(index).addAuthors(book.getAuthors());
+            index++;
         }
 
         return copyOfBooks;
@@ -80,14 +79,19 @@ public class CollectionOfBooks {
         List<Book> booksByTitle = new ArrayList<>();
         boolean contains = false;
         for (Book book: theBooks){
-            contains = book.getTitle().indexOf(searchWord) !=-1? true: false;
+            contains = book.getTitle().contains(searchWord);
             if (contains){
                 booksByTitle.add(book);
+                continue;
             }
-            else throw new IllegalStateException();
         }
-        Collections.sort(booksByTitle);
-        return booksByTitle;
+        if (booksByTitle == null){
+            throw new IllegalStateException();
+        }
+        else {
+            Collections.sort(booksByTitle);
+            return booksByTitle;
+        }
     }
     /**
      *Checks if any of the books' Isbn corresponds to the given searchword.
@@ -170,16 +174,21 @@ public class CollectionOfBooks {
         for (Book book: theBooks){
             authors.addAll(book.getAuthors());
             for (var bookAuthors : authors){
-                contains = bookAuthors.getName().indexOf(search) !=-1? true: false;
+                contains = bookAuthors.getName().contains(search);
                 if (contains){
                     booksByAuthor.add(book);
+                    continue;
                 }
-                else throw new IllegalStateException();
             }
             authors.clear();
         }
-        Collections.sort(booksByAuthor);
-        return booksByAuthor;
+        if (booksByAuthor == null){
+            throw new IllegalStateException();
+        }
+        else {
+            Collections.sort(booksByAuthor);
+            return booksByAuthor;
+        }
     }
 
 }

@@ -53,7 +53,7 @@ public class UserInterface {
                 case 3:getsBookBy();
                     break;
                 case 4:
-                    printBooks(theCollection.getBooks());
+                    System.out.println(theCollection.toString());
                     break;
                 case 5:
                     modifyBook();
@@ -195,7 +195,7 @@ public class UserInterface {
 
     public void getsBookBy()
     {
-        System.out.println("What do you want to search by? (1) title\n(2) author\n(3) ISBN\n(4) Genre\n(5) Go back");
+        System.out.println("What do you want to search by?\n(1) title\n(2) author\n(3) ISBN\n(4) Genre\n(5) Go back");
         int choice = Integer.parseInt(scan.nextLine());
         switch (choice)
         {
@@ -217,6 +217,7 @@ public class UserInterface {
         System.out.println("Enter a title:");
         String title = scan.nextLine();
         try {
+            System.out.println("Books found sorted alphabetically: ");
             printBooks(theCollection.getBooksByTitle(title));
         }
         catch (IllegalStateException e){
@@ -228,8 +229,11 @@ public class UserInterface {
     public void getBooksByAuthor(){
         System.out.println("Enter an author");
         String author = scan.nextLine();
+        List<Book> books;
         try {
-            printBooks(theCollection.getBooksByAuthor(author));
+            books = theCollection.getBooksByAuthor(author);
+            System.out.println("Books found sorted alphabetically: ");
+            printBooks(books);
         }
         catch (IllegalStateException e){
             System.out.println("No authors found");
@@ -244,7 +248,10 @@ public class UserInterface {
             System.out.println("No book found with isbn: " + isbn);
             return;
         }
-        else printBooks(theCollection.getBookByIsbn(isbn));
+        else {
+            System.out.println("Books found sorted alphabetically: ");
+            printBooks(theCollection.getBookByIsbn(isbn));
+        }
     }
 
     public void getBooksByGenre(){
