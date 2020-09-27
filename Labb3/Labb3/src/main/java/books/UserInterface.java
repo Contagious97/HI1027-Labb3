@@ -2,6 +2,7 @@ package books;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -244,18 +245,23 @@ public class UserInterface {
     public void getBooksByIsbn(){
         System.out.println("Enter an ISBN");
         String isbn = scan.nextLine();
-        if(theCollection.getBookByIsbn(isbn) == null){
+        List<Book> booksByIsbn;
+
+
+        try {
+            booksByIsbn = theCollection.getBookByIsbn(isbn);
+            System.out.println("Books found: ");
+            Collections.sort(booksByIsbn);
+            printBooks(booksByIsbn);
+        } catch (IllegalStateException e){
             System.out.println("No book found with isbn: " + isbn);
             return;
         }
-        else {
-            System.out.println("Books found sorted alphabetically: ");
-            printBooks(theCollection.getBookByIsbn(isbn));
-        }
+
     }
 
     public void getBooksByGenre(){
-        System.out.println("Enter a genre");
+        System.out.println("Search for:\n(0)Drama \n(1)Romance\n(2)Crime\n(3)Horror\n(4)Comedy");
         int choice = 0;
         Genre genre = null;
         do {
@@ -280,7 +286,18 @@ public class UserInterface {
                     System.out.println("Enter a valid value");
             }
         } while (genre == null);
-        printBooks(theCollection.getBooksByGenre(genre));
+
+        List<Book> booksByGenre;
+
+        try {
+            booksByGenre = theCollection.getBooksByGenre(genre);
+            Collections.sort(booksByGenre);
+            System.out.println("Books found:");
+            printBooks(booksByGenre);
+        } catch (IllegalStateException e){
+            System.out.println("No books found");
+        }
+
     }
 
     public void printBooks(List<Book> theBooks){

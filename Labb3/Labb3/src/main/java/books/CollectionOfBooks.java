@@ -85,7 +85,7 @@ public class CollectionOfBooks {
                 continue;
             }
         }
-        if (booksByTitle == null){
+        if (booksByTitle.size() == 0){
             throw new IllegalStateException();
         }
         else {
@@ -102,14 +102,15 @@ public class CollectionOfBooks {
         List<Book> booksByIsbn = new ArrayList<>();
         searchWord = searchWord.replace("-","");
         for (Book book: theBooks){
-            for (int i = 0; i<book.getIsbn().length(); i++){
-                if (searchWord.charAt(i) == book.getIsbn().charAt(i)){
-                    booksByIsbn.add(book);
-                    continue;
-                }
+            if (book.getIsbn().contains(searchWord)){
+                booksByIsbn.add(book);
             }
         }
-        return booksByIsbn;
+        if (booksByIsbn.size() == 0){
+            throw new IllegalStateException();
+        }
+        else return booksByIsbn;
+
     }
     /**
      *Checks if any of the books' genre in the collection corresponds to the given genre.
@@ -124,7 +125,10 @@ public class CollectionOfBooks {
                 continue;
             }
         }
-        return booksByGenre;
+        if (booksByGenre.size() == 0){
+            throw new IllegalStateException();
+        }
+        else return booksByGenre;
     }
     /**
      *Creates a string containing all the books in the collection and their information
