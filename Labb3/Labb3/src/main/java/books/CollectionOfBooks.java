@@ -105,6 +105,7 @@ public class CollectionOfBooks {
             for (int i = 0; i<book.getIsbn().length(); i++){
                 if (searchWord.charAt(i) == book.getIsbn().charAt(i)){
                     booksByIsbn.add(book);
+                    continue;
                 }
             }
         }
@@ -120,6 +121,7 @@ public class CollectionOfBooks {
         for (Book book: theBooks){
             if (book.getGenre().getValue() == genre.getValue()){
                 booksByGenre.add(book);
+                continue;
             }
         }
         return booksByGenre;
